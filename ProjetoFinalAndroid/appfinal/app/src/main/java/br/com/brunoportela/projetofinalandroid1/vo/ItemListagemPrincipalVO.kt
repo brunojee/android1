@@ -1,6 +1,8 @@
 package br.com.brunoportela.projetofinalandroid1.vo
 
-class ItemListagemPrincipalVO {
+import java.io.Serializable
+
+class ItemListagemPrincipalVO : Serializable {
 
     var titulo: String? = null
     var descricao: String? = null
