@@ -5,7 +5,6 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import br.com.brunoportela.projetofinalandroid1.R
 import br.com.brunoportela.projetofinalandroid1.database.ConexaoBanco
-import br.com.brunoportela.projetofinalandroid1.entidades.Usuario
 import br.com.brunoportela.projetofinalandroid1.util.Utilitarios
 import kotlinx.android.synthetic.main.activity_redefinir_senha.*
 
@@ -36,7 +35,6 @@ class RedefinirSenhaActivity : AppCompatActivity() {
                 } else {
 
                     validarCampos(campos)
-
 
                     // Verificar se ja existe o usuário
                     u.senha = campos.get("senha") as String

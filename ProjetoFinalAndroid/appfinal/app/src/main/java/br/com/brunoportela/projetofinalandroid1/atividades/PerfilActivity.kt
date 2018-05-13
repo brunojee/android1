@@ -53,16 +53,19 @@ class PerfilActivity : AppCompatActivity() {
                 usuarioBanco.matricula  = campos.get("matricula") as String
                 usuarioBanco.telefone   = campos.get("telefone") as String
 
+                if((campos.get("senha") as String).length > 0){
+                    usuarioBanco.senha   = campos.get("senha") as String
+                }
+
                 ConexaoBanco.obterConexao(applicationContext).usuarioDao().atualizarUsuario(usuarioBanco)
 
-                this.finish()
-
+                Utilitarios.mostrarMensagem(this, "Dados salvos com sucesso")
 
                 val intent = Utilitarios.novaIntent(this, PrincipalActivity::class.java, idUsuario!!)
                 startActivity(intent)
 
+                this.finish()
 
-                Utilitarios.mostrarMensagem(this, "Dados salvos com sucesso")
 
 
             }catch (ex : Exception){
