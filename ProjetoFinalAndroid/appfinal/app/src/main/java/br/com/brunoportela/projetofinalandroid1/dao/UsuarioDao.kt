@@ -7,12 +7,17 @@ import br.com.brunoportela.projetofinalandroid1.entidades.Usuario
 interface UsuarioDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun inserirUsuario(evt: Usuario)
+    fun inserirUsuario(u: Usuario)
 
     @Update
-    fun atualizarUsuario(evt: Usuario)
+    fun atualizarUsuario(u: Usuario)
 
-    @Query("SELECT * FROM usuario WHERE email = :email AND senha = :senha")
-    fun obterUsuario(email:String, senha:String): Array<Usuario>
+    @Query("SELECT * FROM usuario WHERE email = :email LIMIT 1")
+    fun obterUsuario(email:String): Usuario
 
+    @Query("SELECT * FROM usuario WHERE idUsuario = :idUsuario LIMIT 1")
+    fun obterUsuarioPorId(idUsuario:Int): Usuario
+
+    @Query("SELECT * FROM usuario WHERE email = :email AND senha = :senha LIMIT 1")
+    fun loginUsuario(email:String, senha:String): Usuario
 }

@@ -12,7 +12,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-
         botaoIrLogin.setOnClickListener{
             val intent = Intent(this, LoginActivity::class.java )
             startActivity(intent)
@@ -20,6 +19,11 @@ class MainActivity : AppCompatActivity() {
 
         botaoIrNovoUsuario.setOnClickListener{
             val intent = Intent(this, NovoUsuarioActivity::class.java )
+            startActivity(intent)
+        }
+
+        botaoIrEsqueciSenha.setOnClickListener {
+            val intent = Intent(this, RedefinirSenhaActivity::class.java )
             startActivity(intent)
         }
     }
