@@ -12,8 +12,15 @@ class DetalheNoticiaActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detalhe_noticia)
 
+        botaoFecharDetalhe.setOnClickListener {
+            finish()
+        }
 
-       val noticia = intent.extras.get("itemNoticia") as ItemListagemPrincipalVO
+        carregarNotifica();
+    }
+
+    fun carregarNotifica(){
+        val noticia = intent.extras.get("itemNoticia") as ItemListagemPrincipalVO
 
 
         if(noticia == null){
@@ -26,7 +33,5 @@ class DetalheNoticiaActivity : AppCompatActivity() {
                 imagem.setImageResource(noticia.imagem!!)
             }
         }
-
-
     }
 }

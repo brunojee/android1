@@ -113,7 +113,7 @@ class PrincipalActivity : AppCompatActivity() {
                 context!!.startActivity(intent)
 
             }
-            
+
             return foodView
         }
     }
