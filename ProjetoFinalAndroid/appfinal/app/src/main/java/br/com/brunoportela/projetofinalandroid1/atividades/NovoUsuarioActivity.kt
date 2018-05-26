@@ -6,6 +6,7 @@ import android.os.Bundle
 import br.com.brunoportela.projetofinalandroid1.R
 import br.com.brunoportela.projetofinalandroid1.database.ConexaoBanco
 import br.com.brunoportela.projetofinalandroid1.entidades.Usuario
+import br.com.brunoportela.projetofinalandroid1.service.UsuarioService
 import br.com.brunoportela.projetofinalandroid1.util.Utilitarios
 import kotlinx.android.synthetic.main.activity_novo_usuario.*
 
@@ -28,11 +29,8 @@ class NovoUsuarioActivity : AppCompatActivity() {
             try {
                 validarCampos(campos)
 
-                val conexao = ConexaoBanco.obterConexao(applicationContext)
-
-
                 // Verificar se ja existe o usuário
-                val u = conexao.usuarioDao().obterUsuario(campos.get("email") as String)
+                val u = UsuarioService().obterUsuario(campos.get("email") as String, applicationContext)
 
                 if(u != null){
                     Utilitarios.mostrarMensagem(this, "Email já existe em nossa base")
@@ -42,7 +40,7 @@ class NovoUsuarioActivity : AppCompatActivity() {
                     usuario.email = campos.get("email") as String
                     usuario.senha = campos.get("senha") as String
 
-                    conexao.usuarioDao().inserirUsuario(usuario)
+                    UsuarioService().inserirUsuario(usuario, applicationContext)
 
                     Utilitarios.mostrarMensagem(this, "Usuário criado com sucesso!")
 

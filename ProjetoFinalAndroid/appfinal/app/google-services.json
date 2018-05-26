@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "455585982564",
+    "firebase_url": "https://alunoonlineandroid2018.firebaseio.com",
+    "project_id": "alunoonlineandroid2018",
+    "storage_bucket": "alunoonlineandroid2018.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:455585982564:android:da84e09b12211c0b",
+        "android_client_info": {
+          "package_name": "br.com.brunoportela.projetofinalandroid1"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "455585982564-l2v6hptf19ca3ucih4dchgcfc73jqbcf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBIIjhNuTLmrL0U7Z2PgEDlsgiXI1Owhhk"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "455585982564-l2v6hptf19ca3ucih4dchgcfc73jqbcf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

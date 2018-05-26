@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import br.com.brunoportela.projetofinalandroid1.R
 import br.com.brunoportela.projetofinalandroid1.database.ConexaoBanco
+import br.com.brunoportela.projetofinalandroid1.service.UsuarioService
 import br.com.brunoportela.projetofinalandroid1.util.Utilitarios
 import kotlinx.android.synthetic.main.activity_perfil.*
 
@@ -23,7 +24,7 @@ class PerfilActivity : AppCompatActivity() {
         // ###################################################
 
 
-        val usuario = ConexaoBanco.obterConexao(applicationContext).usuarioDao().obterUsuarioPorId(idUsuario!!)
+        val usuario = UsuarioService().obterUsuarioPorId(idUsuario!!, applicationContext)
 
         email.setText(usuario.email)
         nome.setText(usuario.nome)
@@ -47,7 +48,7 @@ class PerfilActivity : AppCompatActivity() {
             try {
                 validarCampos(campos)
 
-                val usuarioBanco = ConexaoBanco.obterConexao(applicationContext).usuarioDao().obterUsuarioPorId(idUsuario)
+                val usuarioBanco = UsuarioService().obterUsuarioPorId(idUsuario, applicationContext)
 
                 usuarioBanco.nome       = campos.get("nome") as String
                 usuarioBanco.matricula  = campos.get("matricula") as String
@@ -57,7 +58,7 @@ class PerfilActivity : AppCompatActivity() {
                     usuarioBanco.senha   = campos.get("senha") as String
                 }
 
-                ConexaoBanco.obterConexao(applicationContext).usuarioDao().atualizarUsuario(usuarioBanco)
+                UsuarioService().atualizarUsuario(usuarioBanco, applicationContext)
 
                 Utilitarios.mostrarMensagem(this, "Dados salvos com sucesso")
 
