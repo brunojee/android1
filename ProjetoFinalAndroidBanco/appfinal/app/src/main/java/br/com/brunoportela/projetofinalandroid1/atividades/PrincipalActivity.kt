@@ -14,7 +14,6 @@ import android.widget.BaseAdapter
 import br.com.brunoportela.projetofinalandroid1.R
 import br.com.brunoportela.projetofinalandroid1.util.Utilitarios
 import br.com.brunoportela.projetofinalandroid1.vo.ItemListagemPrincipalVO
-import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_principal.*
 import kotlinx.android.synthetic.main.activity_principal_listagem.view.*
 import java.io.Serializable
@@ -37,27 +36,17 @@ class PrincipalActivity : AppCompatActivity() {
     var adapter: TabelaPrincipalAdapter? = null
     var listaNoticias = ArrayList<ItemListagemPrincipalVO>()
 
-    var mOAuth : FirebaseAuth? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_principal)
 
-        mOAuth = FirebaseAuth.getInstance()
-
         // ####### Validando usuário Logado ##################
-        var usuario = mOAuth?.currentUser
-        if(usuario == null){
+        val idUsuario = Utilitarios.validarUsuarioLogado(intent)
+        if(idUsuario == null){
             val intent = Intent(this, LoginActivity::class.java )
             startActivity(intent)
         }
-
-        // ####### Validando usuário Logado ##################
-//        val idUsuario = Utilitarios.validarUsuarioLogado(intent)
-//        if(idUsuario == null){
-//            val intent = Intent(this, LoginActivity::class.java )
-//            startActivity(intent)
-//        }
         // ###################################################
 
 
@@ -74,7 +63,7 @@ class PrincipalActivity : AppCompatActivity() {
 
 
         botaoIrPerfil.setOnClickListener{
-            val intent = Utilitarios.novaIntent(this, PerfilActivity::class.java)
+            val intent = Utilitarios.novaIntent(this, PerfilActivity::class.java, idUsuario!!)
             startActivity(intent)
         }
 

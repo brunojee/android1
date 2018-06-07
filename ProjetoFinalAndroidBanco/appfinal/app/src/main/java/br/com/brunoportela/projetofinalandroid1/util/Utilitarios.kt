@@ -10,8 +10,6 @@ import br.com.brunoportela.projetofinalandroid1.database.AppDatabase
 import java.util.regex.Pattern
 import android.view.Gravity
 import br.com.brunoportela.projetofinalandroid1.atividades.LoginActivity
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
 
 
 class Utilitarios {
@@ -35,14 +33,22 @@ class Utilitarios {
 
         private val INTENT_USER_ID = "user_id"
 
-        fun novaIntent(context: Context, classe : Class<*>): Intent {
+        fun novaIntent(context: Context, classe : Class<*>, idUsuario : Int): Intent {
             val intent = Intent(context, classe)
-            //intent.putExtra(INTENT_USER_ID, idUsuario)
+            intent.putExtra(INTENT_USER_ID, idUsuario)
             return intent
         }
 
 
+        fun validarUsuarioLogado(intent : Intent): Int? {
+            val retorno = intent.extras.get(INTENT_USER_ID)
 
+            if(retorno == null){
+                return null
+            }
+
+            return retorno as Int?
+        }
 
         /**
         fun novaIntentAutenticada(context: Context, intent : Intent): Intent {

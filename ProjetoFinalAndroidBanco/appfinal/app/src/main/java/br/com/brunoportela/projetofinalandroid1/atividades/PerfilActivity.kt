@@ -7,34 +7,29 @@ import br.com.brunoportela.projetofinalandroid1.R
 import br.com.brunoportela.projetofinalandroid1.database.ConexaoBanco
 import br.com.brunoportela.projetofinalandroid1.service.UsuarioService
 import br.com.brunoportela.projetofinalandroid1.util.Utilitarios
-import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_perfil.*
 
 class PerfilActivity : AppCompatActivity() {
-
-    var mOAuth : FirebaseAuth? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_perfil)
 
-        mOAuth = FirebaseAuth.getInstance()
-
         // ####### Validando usuário Logado ##################
-        var usuario = mOAuth?.currentUser
-        if(usuario == null){
+        val idUsuario = Utilitarios.validarUsuarioLogado(intent)
+        if(idUsuario == null){
             val intent = Intent(this, LoginActivity::class.java )
             startActivity(intent)
         }
         // ###################################################
 
 
-       // val usuario = UsuarioService().obterUsuarioPorId(idUsuario!!, applicationContext)
+        val usuario = UsuarioService().obterUsuarioPorId(idUsuario!!, applicationContext)
 
-        email.setText(usuario?.email)
-        nome.setText(usuario?.displayName)
-        //matricula.setText(usuario.)
-        telefone.setText(usuario?.phoneNumber)
+        email.setText(usuario.email)
+        nome.setText(usuario.nome)
+        matricula.setText(usuario.matricula)
+        telefone.setText(usuario.telefone)
 
 
 
@@ -53,23 +48,6 @@ class PerfilActivity : AppCompatActivity() {
             try {
                 validarCampos(campos)
 
-
-//                mOAuth?.let { auth ->
-//
-//                    auth.createUserWithEmailAndPassword(campos.get("email") as String, campos.get("senha") as String).addOnCompleteListener({task ->
-//
-//                        if(task.isSuccessful){
-//                            val intent = Intent(this, LoginActivity::class.java )
-//                            startActivity(intent)
-//                        } else {
-//                            Utilitarios.mostrarMensagem(this, task.exception.toString())
-//                        }
-//
-//
-//                    })
-//                }
-
-                /**
                 val usuarioBanco = UsuarioService().obterUsuarioPorId(idUsuario, applicationContext)
 
                 usuarioBanco.nome       = campos.get("nome") as String
@@ -81,12 +59,10 @@ class PerfilActivity : AppCompatActivity() {
                 }
 
                 UsuarioService().atualizarUsuario(usuarioBanco, applicationContext)
-                */
-
 
                 Utilitarios.mostrarMensagem(this, "Dados salvos com sucesso")
 
-                val intent = Utilitarios.novaIntent(this, PrincipalActivity::class.java)
+                val intent = Utilitarios.novaIntent(this, PrincipalActivity::class.java, idUsuario!!)
                 startActivity(intent)
 
                 this.finish()

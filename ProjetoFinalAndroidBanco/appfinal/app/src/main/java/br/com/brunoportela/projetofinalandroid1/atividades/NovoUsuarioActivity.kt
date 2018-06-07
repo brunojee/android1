@@ -7,20 +7,15 @@ import br.com.brunoportela.projetofinalandroid1.R
 import br.com.brunoportela.projetofinalandroid1.database.ConexaoBanco
 import br.com.brunoportela.projetofinalandroid1.entidades.Usuario
 import br.com.brunoportela.projetofinalandroid1.service.UsuarioService
-import br.com.brunoportela.projetofinalandroid1.util.UtilFirebase
 import br.com.brunoportela.projetofinalandroid1.util.Utilitarios
-import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_novo_usuario.*
 
 class NovoUsuarioActivity : AppCompatActivity() {
-
-    var mOAuth : FirebaseAuth? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_novo_usuario)
 
-        mOAuth = FirebaseAuth.getInstance()
 
         botaoNovoUsuario.setOnClickListener {
 
@@ -34,22 +29,7 @@ class NovoUsuarioActivity : AppCompatActivity() {
             try {
                 validarCampos(campos)
 
-                mOAuth?.let { auth ->
-
-                    auth.createUserWithEmailAndPassword(campos.get("email") as String, campos.get("senha") as String).addOnCompleteListener({task ->
-
-                        if(task.isSuccessful){
-                            val intent = Intent(this, LoginActivity::class.java )
-                            startActivity(intent)
-                        } else {
-                            Utilitarios.mostrarMensagem(this, UtilFirebase.validarExcecao(task.exception!!))
-                        }
-
-
-                    })
-                }
-
-               /* // Verificar se ja existe o usuário
+                // Verificar se ja existe o usuário
                 val u = UsuarioService().obterUsuario(campos.get("email") as String, applicationContext)
 
                 if(u != null){
@@ -66,7 +46,7 @@ class NovoUsuarioActivity : AppCompatActivity() {
 
                     val intent = Intent(this, LoginActivity::class.java )
                     startActivity(intent)
-                }*/
+                }
 
             }catch (ex : Exception){
                 Utilitarios.mostrarMensagem(this, ex.message!!)
