@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">RecicleViewExample</string>
+    <string name="title_activity_recycle">RecycleActivity</string>
+</resources>
